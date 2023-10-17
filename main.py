@@ -24,7 +24,8 @@ pygame.display.set_caption("Blackjack")
 # Load card images (need card images for this)
 # Example image filenames: "2_of_hearts.png", "ace_of_spades.png", etc.
 # Replace these with card images.
-card_images = [pygame.image.load(f"{rank}_of_{suit}.png") for rank, suit in zip(ranks, suits)]
+#card_images = [pygame.image.load(f"{rank}_of_{suit}.png") for rank, suit in zip(ranks, suits)]
+card_images = [pygame.image.load(f"Ace_of_{suit}.png") for rank, suit in zip(ranks, suits)]
 
 # Create a font for displaying text
 font = pygame.font.Font(None, 36)
@@ -32,8 +33,11 @@ font = pygame.font.Font(None, 36)
 # Define the deck of cards and hands
 deck = [{"rank": rank, "suit": suit, "image": image} for rank, suit, image in zip(ranks, suits, card_images)]
 random.shuffle(deck)
+
 player_hand = [deck.pop(), deck.pop()]
 dealer_hand = [deck.pop(), deck.pop()]
+#player_hand = [deck.pop(), deck.pop()]
+#dealer_hand = [deck.pop(), deck.pop()]
 
 # Define button coordinates and colors
 hit_button_rect = pygame.Rect(20, 500, BUTTON_WIDTH, BUTTON_HEIGHT)
