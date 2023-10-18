@@ -22,7 +22,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Blackjack")
 
 # Load card images (need card images for this)
-# Example image filenames: "2_of_hearts.png", "ace_of_spades.png", etc.
+# Example image filenames: "2_of_Hearts.png", "Ace_of_Spades.png", etc.
 # Replace these with card images.
 #card_images = [pygame.image.load(f"{rank}_of_{suit}.png") for rank, suit in zip(ranks, suits)]
 card_images = [pygame.image.load(f"Ace_of_{suit}.png") for rank, suit in zip(ranks, suits)]
