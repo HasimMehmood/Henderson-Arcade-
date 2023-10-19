@@ -24,7 +24,8 @@ pygame.display.set_caption("Blackjack")
 # Load card images (need card images for this)
 # Example image filenames: "2_of_Hearts.png", "Ace_of_Spades.png", etc.
 # Replace these with card images.
-card_images = [pygame.image.load(f"Assets/Cards{rank}_of_{suit}.png") for rank, suit in zip(ranks, suits)]
+card_images = [pygame.image.load(f"Assets/Cards/{rank}_of_{suit}.png") for rank, suit in zip(ranks, suits)]
+
 
 # Create a font for displaying text
 font = pygame.font.Font(None, 36)
