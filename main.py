@@ -1,4 +1,4 @@
-import pygame
+import pygame 
 import random
 
 # Initialize Pygame
@@ -32,6 +32,17 @@ font = pygame.font.Font(None, 36)
 
 # Define the deck of cards and hands
 deck = [{"rank": rank, "suit": suit, "image": image} for rank, suit, image in zip(ranks, suits, card_images)]
+
+# define shuffle function
+
+def reset_deck():
+    global deck
+    deck = [{"rank": rank, "suit": suit, "image": image} for rank, suit, image in zip(ranks, suits, card_images)]
+    random.shuffle(deck)
+
+reset_deck()
+
+
 random.shuffle(deck)
 
 player_hand = [deck.pop(), deck.pop()]
@@ -84,15 +95,22 @@ while running:
         elif not game_over:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if hit_button_rect.collidepoint(event.pos):
+                    if not deck:
+                        reset_deck()
                     player_hand.append(deck.pop())
                 elif stand_button_rect.collidepoint(event.pos):
                     while calculate_hand_value(dealer_hand) < 17:
+                        if not deck:
+                            reset_deck()
                         dealer_hand.append(deck.pop())
                     game_over = True
                 elif new_game_button_rect.collidepoint(event.pos):
+                    if not deck:
+                        reset_deck()
                     player_hand = [deck.pop(), deck.pop()]
                     dealer_hand = [deck.pop(), deck.pop()]
                     game_over = False
+
 
     screen.fill(WHITE)
 
