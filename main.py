@@ -121,8 +121,10 @@ while running:
     screen.blit(font.render(f"Player's Hand Value: {player_value}", True, RED), (20, 250))
 
     # Display dealer's hand (showing only one card if the game is not over)
+    # Display dealer's hand (showing the entire hand)
     screen.blit(font.render("Dealer's Hand:", True, RED), (20, 300))
-    display_hand([dealer_hand[0]] + [None] * (len(dealer_hand) - 1), 20, 340)
+    display_hand(dealer_hand, 20, 340)
+
 
     if game_over:
         dealer_value = calculate_hand_value(dealer_hand)
