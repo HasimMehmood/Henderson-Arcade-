@@ -87,30 +87,36 @@ def calculate_hand_value(hand):
 # Main game loop
 running = True
 game_over = False
-
+# Main game loop
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
-        elif not game_over:
+            running = False  # If the user closes the window, exit the game.
+        elif not game_over:  # Check if the game is not over.
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if hit_button_rect.collidepoint(event.pos):
+                    # The "Hit" button was clicked, so draw a card and add it to the player's hand.
                     if not deck:
-                        reset_deck()
-                    player_hand.append(deck.pop())
+                        reset_deck()  # If the deck is empty, reshuffle the cards.
+                    player_hand.append(deck.pop())  # Draw a card from the deck.
+
                 elif stand_button_rect.collidepoint(event.pos):
+                    # The "Stand" button was clicked, so the player's turn is over.
+                    # The dealer will now draw cards until their hand value is at least 17.
                     while calculate_hand_value(dealer_hand) < 17:
                         if not deck:
-                            reset_deck()
-                        dealer_hand.append(deck.pop())
-                    game_over = True
-                elif new_game_button_rect.collidepoint(event.pos):
-                    if not deck:
-                        reset_deck()
-                    player_hand = [deck.pop(), deck.pop()]
-                    dealer_hand = [deck.pop(), deck.pop()]
-                    game_over = False
+                            reset_deck()  # If the deck is empty, reshuffle the cards.
+                        dealer_hand.append(deck.pop())  # Dealer draws a card.
+                    game_over = True  # The game is now over.
 
+                elif new_game_button_rect.collidepoint(event.pos):
+                    # The "New Game" button was clicked, so reset the game by reshuffling the deck
+                    # and dealing new hands for both the player and the dealer.
+                    if not deck:
+                        reset_deck()  # If the deck is empty, reshuffle the cards.
+                    player_hand = [deck.pop(), deck.pop()]  # Deal two cards to the player.
+                    dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
+                    game_over = False  # The game is not over.
 
     screen.fill(WHITE)
 
