@@ -1,5 +1,6 @@
 import pygame 
 import random
+import os
 
 # Initialize Pygame
 pygame.init()
@@ -21,23 +22,21 @@ suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Blackjack")
 
-# Load card images (need card images for this)
-# Example image filenames: "2_of_Hearts.png", "Ace_of_Spades.png", etc.
-# Replace these with card images.
-card_images = [pygame.image.load(f"Assets/Cards/{rank}_of_{suit}.png") for rank, suit in zip(ranks, suits)]
 
 
 # Create a font for displaying text
 font = pygame.font.Font(None, 36)
 
-# Define the deck of cards and hands
-deck = [{"rank": rank, "suit": suit, "image": image} for rank, suit, image in zip(ranks, suits, card_images)]
 
+deck = [{"rank": rank, "suit": suit, "image": pygame.image.load(f"Assets/Cards/{rank}_of_{suit}.png")} for rank in ranks for suit in suits]
+card_images = [card["image"] for card in deck]
+
+print(deck)
 # define shuffle function
 
 def reset_deck():
     global deck
-    deck = [{"rank": rank, "suit": suit, "image": image} for rank, suit, image in zip(ranks, suits, card_images)]
+    deck = [{"rank": rank, "suit": suit, "image": pygame.image.load(f"Assets/Cards/{rank}_of_{suit}.png")} for rank in ranks for suit in suits]
     random.shuffle(deck)
 
 reset_deck()
@@ -96,7 +95,7 @@ while running:
             if calculate_hand_value(player_hand)>= 21: 
                 while calculate_hand_value(dealer_hand) < 17:
                     if not deck:
-                        reset_deck()  # If the deck is empty, reshuffle the cards.
+                            reset_deck()  # If the deck is empty, reshuffle the cards.
                     dealer_hand.append(deck.pop())  # Dealer draws a card.
                     game_over = True  # The game is now over.
             elif event.type == pygame.MOUSEBUTTONDOWN:
