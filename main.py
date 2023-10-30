@@ -89,13 +89,13 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False  # If the user closes the window, exit the game.
-        if not game_over:  # Check if the game is not over.
+        if not game_over :  # Check if the game is not over.
             if calculate_hand_value(player_hand)>= 21: 
                 while calculate_hand_value(dealer_hand) < 17:
                     if not deck:
                             reset_deck()  # If the deck is empty, reshuffle the cards.
                     dealer_hand.append(deck.pop())  # Dealer draws a card.
-                    game_over = True  # The game is now over.
+                game_over = True  # The game is now over.
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if hit_button_rect.collidepoint(event.pos):
                     # The "Hit" button was clicked, so draw a card and add it to the player's hand.
