@@ -29,9 +29,6 @@ font = pygame.font.Font(None, 36)
 
 
 deck = [{"rank": rank, "suit": suit, "image": pygame.image.load(f"Assets/Cards/{rank}_of_{suit}.png")} for rank in ranks for suit in suits]
-card_images = [card["image"] for card in deck]
-
-print(deck)
 # define shuffle function
 
 def reset_deck():
@@ -76,12 +73,13 @@ def calculate_hand_value(hand):
             else:
                 value += int(rank)
 
-    # Adjust for aces
+    # Adjust for Aces
     while value > 21 and num_aces > 0:
         value -= 10
         num_aces -= 1
 
     return value
+
 
 # Main game loop
 running = True
