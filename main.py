@@ -11,11 +11,13 @@ CARD_GAP = 20
 BUTTON_WIDTH, BUTTON_HEIGHT = 100, 40
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+hit_button= pygame.image.load("Assets\Buttons\Button\Hit_Button.png")
+stand_button= pygame.image.load("Assets\Buttons\Button\Stand_Button.png")
+new_game_button= pygame.image.load("Assets\Buttons\Button/NewGame_Button.png")
 
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-
 
 # Create the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -27,9 +29,7 @@ pygame.display.set_caption("Blackjack")
 font = pygame.font.Font(None, 36)
 
 
-deck = [{"rank": rank, "suit": suit, "image": pygame.image.load(f"Assets/Cards/{rank}_of_{suit}.png")} for rank in ranks for suit in suits]
-# define shuffle function
-
+# define shuffle function, it will define the deck array
 def reset_deck():
     global deck
     deck = [{"rank": rank, "suit": suit, "image": pygame.image.load(f"Assets/Cards/{rank}_of_{suit}.png")} for rank in ranks for suit in suits]
@@ -133,18 +133,14 @@ while running:
     screen.blit(font.render("Dealer's Hand:", True, RED), (20, 300))
     display_hand(dealer_hand, 20, 340)
 
-
     if game_over:
         dealer_value = calculate_hand_value(dealer_hand)
         screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, RED), (20, 470))
 
     # Create buttons
-    pygame.draw.rect(screen, RED, hit_button_rect)
-    pygame.draw.rect(screen, RED, stand_button_rect)
-    pygame.draw.rect(screen, RED, new_game_button_rect)
-    screen.blit(font.render("Hit", True, WHITE), (30, 505))
-    screen.blit(font.render("Stand", True, WHITE), (150, 505))
-    screen.blit(font.render("New Game", True, WHITE), (270, 505))
+    screen.blit(hit_button, hit_button_rect)
+    screen.blit(stand_button, stand_button_rect)
+    screen.blit(new_game_button, new_game_button_rect)
 
     # Check for win/lose conditions
     if game_over:
