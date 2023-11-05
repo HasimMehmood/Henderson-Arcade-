@@ -81,9 +81,9 @@ def calculate_hand_value(hand):
     #Create function to Draw cards for dealer
 def dealer_draw():
     while calculate_hand_value(dealer_hand) < 17:
-                    if not deck:
-                            reset_deck()  # If the deck is empty, reshuffle the cards.
-                    dealer_hand.append(deck.pop())  # Dealer draws a card.
+        if not deck:
+            reset_deck()  # If the deck is empty, reshuffle the cards.
+        dealer_hand.append(deck.pop())  # Dealer draws a card.
 
 # Main game loop
 running = True
@@ -98,6 +98,7 @@ while running:
             if calculate_hand_value(player_hand)>= 21:  
                 dealer_draw()
                 game_over = True  # The game is now over.
+                show_dealer=False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if hit_button_rect.collidepoint(event.pos):
                     # The "Hit" button was clicked, so draw a card and add it to the player's hand.
@@ -117,7 +118,7 @@ while running:
                 player_hand = [deck.pop(), deck.pop()]  # Deal two cards to the player.
                 dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
                 game_over = False  # The game is not over.
-                show_dealer=False
+                show_dealer=False  # Reset dealer hand
 
 
     screen.fill(WHITE)
@@ -131,7 +132,7 @@ while running:
 
     # Display dealer's hand
     screen.blit(font.render("Dealer's Hand:", True, RED), (20, 300))
-
+    
     if show_dealer:
         display_hand(dealer_hand, 20, 340)  # Show the entire dealer's hand
     else:
