@@ -23,11 +23,8 @@ suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Blackjack")
 
-
-
 # Create a font for displaying text
 font = pygame.font.Font(None, 36)
-
 
 # define shuffle function, it will define the deck array
 def reset_deck():
@@ -89,7 +86,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False  # If the user closes the window, exit the game.
         if not game_over :  # Check if the game is not over.
-            if calculate_hand_value(player_hand)>= 21: 
+            if calculate_hand_value(player_hand)>= 21:  
                 while calculate_hand_value(dealer_hand) < 17:
                     if not deck:
                             reset_deck()  # If the deck is empty, reshuffle the cards.
@@ -145,15 +142,15 @@ while running:
     # Check for win/lose conditions
     if game_over:
         if player_value > 21:
-            screen.blit(font.render("Player busts! Dealer wins.", True, RED), (300, 250))
+            screen.blit(font.render(" Player busts! Dealer wins.", True, RED), (300, 250))
         elif dealer_value > 21:
-            screen.blit(font.render("Dealer busts! Player wins.", True, RED), (300, 250))
+            screen.blit(font.render(" Dealer busts! Player wins.", True, RED), (300, 250))
         elif dealer_value > player_value:
             screen.blit(font.render("Dealer wins.", True, RED), (300, 250))
         elif dealer_value < player_value:
             screen.blit(font.render("Player wins.", True, RED), (300, 250))
         else:
-            screen.blit(font.render("It's a tie!", True, RED), (300, 250))
+            screen.blit(font.render(" It's a tie!", True, RED), (300, 250))
 
     pygame.display.flip()
 
