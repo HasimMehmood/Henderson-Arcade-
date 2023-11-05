@@ -14,6 +14,7 @@ RED = (255, 0, 0)
 hit_button= pygame.image.load("Assets\Buttons\Button\Hit_Button.png")
 stand_button= pygame.image.load("Assets\Buttons\Button\Stand_Button.png")
 new_game_button= pygame.image.load("Assets\Buttons\Button/NewGame_Button.png")
+back_of_card= pygame.image.load("Assets\Cards\Back_of_Card.png")
 
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -128,8 +129,12 @@ while running:
     # Display dealer's hand (showing only one card if the game is not over)
     # Display dealer's hand (showing the entire hand)
     screen.blit(font.render("Dealer's Hand:", True, RED), (20, 300))
-    display_hand(dealer_hand, 20, 340)
 
+    #display back of card 
+   #display_hand(dealer_hand, 20, 340)
+    screen.blit(back_of_card, (20, 340))
+    screen.blit(back_of_card, (140,340))
+    
     if game_over:
         dealer_value = calculate_hand_value(dealer_hand)
         screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, RED), (20, 470))
