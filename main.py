@@ -88,7 +88,7 @@ def dealer_draw():
 # Main game loop
 running = True
 game_over = False
-show_dealer= False
+
 # Main game loop
 while running:
     for event in pygame.event.get():
@@ -98,7 +98,6 @@ while running:
             if calculate_hand_value(player_hand)>= 21:  
                 dealer_draw()
                 game_over = True  # The game is now over.
-                show_dealer=False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if hit_button_rect.collidepoint(event.pos):
                     # The "Hit" button was clicked, so draw a card and add it to the player's hand.
@@ -118,7 +117,6 @@ while running:
                 player_hand = [deck.pop(), deck.pop()]  # Deal two cards to the player.
                 dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
                 game_over = False  # The game is not over.
-                show_dealer=False  # Reset dealer hand
 
 
     screen.fill(WHITE)
@@ -132,13 +130,14 @@ while running:
 
     # Display dealer's hand
     screen.blit(font.render("Dealer's Hand:", True, RED), (20, 300))
-    
-    if show_dealer:
-        display_hand(dealer_hand, 20, 340)  # Show the entire dealer's hand
+
+    # Show the dealer's first card face-down during the player's turn
+    if not game_over:
+        screen.blit(back_of_card, (20, 340))
+        screen.blit(back_of_card, (140, 340))
     else:
-        screen.blit(back_of_card, (20, 340))  # Show the back of the card for the first card
-        display_hand(dealer_hand[1:], 140, 340)  # Show the second card face-up
-    
+        display_hand(dealer_hand, 20, 340)  # Show the entire dealer's hand
+
     if game_over:
         dealer_value = calculate_hand_value(dealer_hand)
         screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, RED), (20, 470))
@@ -155,9 +154,9 @@ while running:
         elif dealer_value > 21:
             screen.blit(font.render(" Dealer busts! Player wins.", True, RED), (300, 250))
         elif dealer_value > player_value:
-            screen.blit(font.render("Dealer wins.", True, RED), (300, 250))
+            screen.blit(font.render(" Dealer wins.", True, RED), (300, 250))
         elif dealer_value < player_value:
-            screen.blit(font.render("Player wins.", True, RED), (300, 250))
+            screen.blit(font.render(" Player wins.", True, RED), (300, 250))
         else:
             screen.blit(font.render(" It's a tie!", True, RED), (300, 250))
 
