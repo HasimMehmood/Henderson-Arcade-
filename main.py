@@ -28,13 +28,12 @@ new_game_animation_frames = [frame.copy().convert('RGB') for frame in ImageSeque
 # Get the size of the first frame to determine the dimensions
 new_game_animation_width, new_game_animation_height = new_game_animation_frames[0].size
 
-def play_new_game_anim():
-    for frame in new_game_animation_frames:
+def play_anim(anim_name, xcoord, ycoord ):
+    for frame in anim_name:
         pygame_frame = pygame.image.fromstring(frame.tobytes(), frame.size, 'RGB')
-        screen.blit(pygame_frame, (260, 500))
+        screen.blit(pygame_frame, (xcoord, ycoord))
         pygame.display.flip()
-        pygame.time.delay(100)  # Adjust the delay between frames as needed
-
+        pygame.time.delay(25)  # Adjust the delay between frames as needed
 
 # Create the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -129,9 +128,9 @@ while running:
             if new_game_button_rect.collidepoint(event.pos):
                 # The "New Game" button was clicked, so reset the game by reshuffling the deck
                 # and dealing new hands for both the player and the dealer.
-                play_new_game_anim()
+                play_anim(new_game_animation_frames, 260,500)
                 pygame.display.flip()
-                pygame.time.delay(1000)  # Display the animation for 1000 milliseconds (adjust as needed)
+                pygame.time.delay(50)  # Display the animation for 1000 milliseconds (adjust as needed)
                 reset_deck()  # If the deck is empty, reshuffle the cards.
                 player_hand = [deck.pop(), deck.pop()]  # Deal two cards to the player.
                 dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
