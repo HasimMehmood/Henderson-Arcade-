@@ -1,5 +1,6 @@
 import pygame 
 import random
+from PIL import Image, ImageSequence
 
 # Initialize Pygame
 pygame.init()
@@ -19,6 +20,21 @@ back_of_card= pygame.image.load("Assets\Cards\Back_of_Card.png")
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
+
+# Load the "New Game" gif using Pillow
+new_game_animation = Image.open("Assets\Buttons\Click Animation/New Game.gif")
+new_game_animation_frames = [frame.copy().convert('RGB') for frame in ImageSequence.Iterator(new_game_animation)]
+
+# Get the size of the first frame to determine the dimensions
+new_game_animation_width, new_game_animation_height = new_game_animation_frames[0].size
+
+def play_new_game_anim():
+    for frame in new_game_animation_frames:
+        pygame_frame = pygame.image.fromstring(frame.tobytes(), frame.size, 'RGB')
+        screen.blit(pygame_frame, (260, 500))
+        pygame.display.flip()
+        pygame.time.delay(100)  # Adjust the delay between frames as needed
+
 
 # Create the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -113,6 +129,9 @@ while running:
             if new_game_button_rect.collidepoint(event.pos):
                 # The "New Game" button was clicked, so reset the game by reshuffling the deck
                 # and dealing new hands for both the player and the dealer.
+                play_new_game_anim()
+                pygame.display.flip()
+                pygame.time.delay(1000)  # Display the animation for 1000 milliseconds (adjust as needed)
                 reset_deck()  # If the deck is empty, reshuffle the cards.
                 player_hand = [deck.pop(), deck.pop()]  # Deal two cards to the player.
                 dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
