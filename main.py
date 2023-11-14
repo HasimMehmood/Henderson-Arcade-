@@ -1,5 +1,5 @@
 import pygame 
-import random
+import random 
 from PIL import Image, ImageSequence
 
 # Initialize Pygame
@@ -12,8 +12,9 @@ CARD_GAP = 20
 BUTTON_WIDTH, BUTTON_HEIGHT = 100, 40
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
-hit_button= pygame.image.load("Assets\Buttons\Button\Hit_Button.png")
-stand_button= pygame.image.load("Assets\Buttons\Button\Stand_Button.png")
+BLACK= (0,0,0)
+hit_button= pygame.image.load("Assets\Buttons\Button/Hit_Button.png")
+stand_button= pygame.image.load("Assets\Buttons\Button/Stand_Button.png")
 new_game_button= pygame.image.load("Assets\Buttons\Button/NewGame_Button.png")
 back_of_card= pygame.image.load("Assets\Cards\Back_of_Card.png")
 animations = ["New Game", "Hit", "Stand"]
@@ -64,9 +65,9 @@ dealer_hand = [deck.pop(), deck.pop()]
 
 
 # Define button coordinates and colors
-hit_button_rect = pygame.Rect(20, 500, BUTTON_WIDTH, BUTTON_HEIGHT)
-stand_button_rect = pygame.Rect(140, 500, BUTTON_WIDTH, BUTTON_HEIGHT)
-new_game_button_rect = pygame.Rect(260, 500, BUTTON_WIDTH, BUTTON_HEIGHT)
+hit_button_rect = pygame.Rect(20, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
+stand_button_rect = pygame.Rect(140, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
+new_game_button_rect = pygame.Rect(260, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 
 # Create a function to display a hand
 def display_hand(hand, x, y):
@@ -122,13 +123,13 @@ while running:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if hit_button_rect.collidepoint(event.pos):
                     # The "Hit" button was clicked, so draw a card and add it to the player's hand.
-                    play_anim("Hit", 20, 500)
+                    play_anim("Hit", 20, 520)
                     if not deck:
                         reset_deck()  # If the deck is empty, reshuffle the cards.
                     player_hand.append(deck.pop())  # Draw a card from the deck.
                 elif stand_button_rect.collidepoint(event.pos):
                     # The "Stand" button was clicked, so the player's turn is over. Or the value is over 21.
-                    play_anim("Stand", 140, 500)
+                    play_anim("Stand", 140, 520)
                     dealer_draw()
                     game_over = True  # The game is now over.
 
@@ -136,7 +137,7 @@ while running:
             if new_game_button_rect.collidepoint(event.pos):
                 # The "New Game" button was clicked, so reset the game by reshuffling the deck
                 # and dealing new hands for both the player and the dealer.
-                play_anim("New Game", 260,500)
+                play_anim("New Game", 260,520)
                 pygame.display.flip()
                 pygame.time.delay(50)  # Display the animation for 1000 milliseconds (adjust as needed)
                 reset_deck()  # If the deck is empty, reshuffle the cards.
@@ -148,14 +149,14 @@ while running:
     screen.fill(WHITE)
 
     # Display player's hand
-    screen.blit(font.render("Player's Hand:", True, RED), (20, 20))
+    screen.blit(font.render("Player's Hand:", True, BLACK), (20, 20))
     display_hand(player_hand, 20, 60)
     player_value = calculate_hand_value(player_hand)
-    screen.blit(font.render(f"Player's Hand Value: {player_value}", True, RED), (20, 250))
+    screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 250))
 
 
     # Display dealer's hand
-    screen.blit(font.render("Dealer's Hand:", True, RED), (20, 300))
+    screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 300))
 
     # Show the dealer's first card face-down during the player's turn
     if not game_over:
@@ -166,7 +167,7 @@ while running:
 
     if game_over:
         dealer_value = calculate_hand_value(dealer_hand)
-        screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, RED), (20, 470))
+        screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, BLACK), (20, 500))
 
     # Create buttons
     screen.blit(hit_button, hit_button_rect)
@@ -176,15 +177,15 @@ while running:
     # Check for win/lose conditions
     if game_over:
         if player_value > 21:
-            screen.blit(font.render(" Player busts! Dealer wins.", True, RED), (300, 250))
+            screen.blit(font.render(" Player busts! Dealer wins.", True, BLACK), (300, 250))
         elif dealer_value > 21:
-            screen.blit(font.render(" Dealer busts! Player wins.", True, RED), (300, 250))
+            screen.blit(font.render(" Dealer busts! Player wins.", True, BLACK), (300, 250))
         elif dealer_value > player_value:
-            screen.blit(font.render(" Dealer wins.", True, RED), (300, 250))
+            screen.blit(font.render(" Dealer wins.", True, BLACK), (300, 250))
         elif dealer_value < player_value:
-            screen.blit(font.render(" Player wins.", True, RED), (300, 250))
+            screen.blit(font.render(" Player wins.", True, BLACK), (300, 250))
         else:
-            screen.blit(font.render(" It's a tie!", True, RED), (300, 250))
+            screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
 
     pygame.display.flip()
 
