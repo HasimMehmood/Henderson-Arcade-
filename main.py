@@ -76,6 +76,13 @@ def display_hand(hand, x, y):
             screen.blit(card["image"], (x, y))
         x += CARD_WIDTH + CARD_GAP
 
+def display_dealer_card(x, y):
+    for card in dealer_hand[:1]:
+        if card:
+            screen.blit(card["image"], (x, y))
+            x += CARD_WIDTH + CARD_GAP
+
+
 # Create a function to calculate the value of a hand
 def calculate_hand_value(hand):
     value = 0
@@ -155,13 +162,13 @@ while running:
     screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 250))
 
 
-    # Display dealer's hand
+    # Display dealer's hand text
     screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 300))
 
     # Show the dealer's first card face-down during the player's turn
     if not game_over:
-        screen.blit(back_of_card, (20, 340))
         screen.blit(back_of_card, (140, 340))
+        display_dealer_card(20, 340 )
     else:
         display_hand(dealer_hand, 20, 340)  # Show the entire dealer's hand
 
