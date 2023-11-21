@@ -13,10 +13,10 @@ BUTTON_WIDTH, BUTTON_HEIGHT = 100, 40
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK= (0,0,0)
-hit_button= pygame.image.load("Assets\Buttons\Button/Hit_Button.png")
-stand_button= pygame.image.load("Assets\Buttons\Button/Stand_Button.png")
-new_game_button= pygame.image.load("Assets\Buttons\Button/NewGame_Button.png")
-back_of_card= pygame.image.load("Assets\Cards\Back_of_Card.png")
+hit_button= pygame.image.load("Assets\\Buttons\\Button/Hit_Button.png")
+stand_button= pygame.image.load("Assets\\Buttons\\Button/Stand_Button.png")
+new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
+back_of_card= pygame.image.load("Assets\\Cards\\Back_of_Card.png")
 animations = ["New Game", "Hit", "Stand"]
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
