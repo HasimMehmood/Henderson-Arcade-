@@ -5,6 +5,9 @@ from PIL import Image, ImageSequence
 # Initialize Pygame
 pygame.init()
 
+#Set Game icon
+pygame.display.set_icon(pygame.image.load("Assets\Favicon\BlackJack_32x32.png") )
+
 # Define constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
 CARD_WIDTH, CARD_HEIGHT = 100, 150
