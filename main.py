@@ -20,7 +20,7 @@ Money= 100
 hit_button= pygame.image.load("Assets\\Buttons\\Button/Hit_Button.png")
 stand_button= pygame.image.load("Assets\\Buttons\\Button/Stand_Button.png")
 new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
-play_button= pygame.image.load()
+play_button= pygame.image.load("Assets\Start Screen\Play_Button.png")
 back_of_card= pygame.image.load("Assets\\Cards\\Back_of_Card.png")
 start_screen= pygame.image.load("Assets\Start Screen\Start_Screen.png")
 animations = ["New Game", "Hit", "Stand", "Play Button"]
@@ -72,7 +72,7 @@ dealer_hand = [deck.pop(), deck.pop()]
 hit_button_rect = pygame.Rect(20, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 stand_button_rect = pygame.Rect(140, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
-play_button_rect= pygame.Rect(260,520, BUTTON_WIDTH, BUTTON_HEIGHT)
+play_button_rect= pygame.Rect(500,480, 240, 124)
 
 # Create a function to display a hand
 def display_hand(hand, x, y):
@@ -134,7 +134,7 @@ while running:
         screen.blit(start_screen, (0,0))
         screen.blit(play_button, play_button_rect)
         if(event.type== pygame.MOUSEBUTTONDOWN and play_button_rect.collidepoint(event.pos)):
-            play_anim("Play Button", 260, 520)
+            play_anim("Play Button", 500,480 )
             game_start=True
     else: 
         if not game_over :  # Check if the game is not over.
