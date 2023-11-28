@@ -20,9 +20,10 @@ Money= 100
 hit_button= pygame.image.load("Assets\\Buttons\\Button/Hit_Button.png")
 stand_button= pygame.image.load("Assets\\Buttons\\Button/Stand_Button.png")
 new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
+play_button= pygame.image.load()
 back_of_card= pygame.image.load("Assets\\Cards\\Back_of_Card.png")
 start_screen= pygame.image.load("Assets\Start Screen\Start_Screen.png")
-animations = ["New Game", "Hit", "Stand"]
+animations = ["New Game", "Hit", "Stand", "Play Button"]
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
@@ -71,7 +72,7 @@ dealer_hand = [deck.pop(), deck.pop()]
 hit_button_rect = pygame.Rect(20, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 stand_button_rect = pygame.Rect(140, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
-start_game_button_rect= pygame.Rect(260,520, BUTTON_WIDTH, BUTTON_HEIGHT)
+play_button_rect= pygame.Rect(260,520, BUTTON_WIDTH, BUTTON_HEIGHT)
 
 # Create a function to display a hand
 def display_hand(hand, x, y):
@@ -131,8 +132,9 @@ while running:
             running = False  # If the user closes the window, exit the game.
     if game_start == False: 
         screen.blit(start_screen, (0,0))
-        screen.blit(new_game_button, new_game_button_rect)
-        if(event.type== pygame.MOUSEBUTTONDOWN and start_game_button_rect.collidepoint(event.pos)):
+        screen.blit(play_button, play_button_rect)
+        if(event.type== pygame.MOUSEBUTTONDOWN and play_button_rect.collidepoint(event.pos)):
+            play_anim("Play Button", 260, 520)
             game_start=True
     else: 
         if not game_over :  # Check if the game is not over.
