@@ -16,10 +16,12 @@ BUTTON_WIDTH, BUTTON_HEIGHT = 100, 40
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK= (0,0,0)
+Money= 100
 hit_button= pygame.image.load("Assets\\Buttons\\Button/Hit_Button.png")
 stand_button= pygame.image.load("Assets\\Buttons\\Button/Stand_Button.png")
 new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
 back_of_card= pygame.image.load("Assets\\Cards\\Back_of_Card.png")
+start_screen= pygame.image.load("Assets\Start Screen\Start_Screen.png")
 animations = ["New Game", "Hit", "Stand"]
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -34,9 +36,7 @@ for animation_name in animations:
     animation = Image.open(animation_path)
     frames = [frame.copy().convert('RGB') for frame in ImageSequence.Iterator(animation)]
     animation_frames[animation_name] = frames
-    animation_width, animation_height = animation_frames[animation_name][0].size
-
-# Get the size of the first frame to determine the dimensions
+    animation_width, animation_height = animation_frames[animation_name][0].size # Get the size of the first frame to determine the dimensions
 
 def play_anim(anim_name, xcoord, ycoord):
     for frame in animation_frames[anim_name]:
@@ -71,6 +71,7 @@ dealer_hand = [deck.pop(), deck.pop()]
 hit_button_rect = pygame.Rect(20, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 stand_button_rect = pygame.Rect(140, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
+start_game_button_rect= pygame.Rect(260,520, BUTTON_WIDTH, BUTTON_HEIGHT)
 
 # Create a function to display a hand
 def display_hand(hand, x, y):
@@ -117,15 +118,23 @@ def dealer_draw():
             reset_deck()  # If the deck is empty, reshuffle the cards.
         dealer_hand.append(deck.pop())  # Dealer draws a card.
 
+
 # Main game loop
 running = True
 game_over = False
+game_start=False
 
 # Main game loop
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False  # If the user closes the window, exit the game.
+    if game_start == False: 
+        screen.blit(start_screen, (0,0))
+        screen.blit(new_game_button, new_game_button_rect)
+        if(event.type== pygame.MOUSEBUTTONDOWN and start_game_button_rect.collidepoint(event.pos)):
+            game_start=True
+    else: 
         if not game_over :  # Check if the game is not over.
             if calculate_hand_value(player_hand)>= 21:  
                 dealer_draw()
@@ -155,47 +164,47 @@ while running:
                 dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
                 game_over = False  # The game is not over.
 
+        screen.fill(WHITE)
 
-    screen.fill(WHITE)
-
-    # Display player's hand
-    screen.blit(font.render("Player's Hand:", True, BLACK), (20, 20))
-    display_hand(player_hand, 20, 60)
-    player_value = calculate_hand_value(player_hand)
-    screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 250))
+        # Display player's hand
+        screen.blit(font.render("Player's Hand:", True, BLACK), (20, 20))
+        display_hand(player_hand, 20, 60)
+        player_value = calculate_hand_value(player_hand)
+        screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 250))
 
 
-    # Display dealer's hand text
-    screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 300))
 
-    # Show the dealer's first card face-down during the player's turn
-    if not game_over:
-        screen.blit(back_of_card, (140, 340))
-        display_dealer_card(20, 340 )
-    else:
-        display_hand(dealer_hand, 20, 340)  # Show the entire dealer's hand
+        # Display dealer's hand text
+        screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 300))
 
-    if game_over:
-        dealer_value = calculate_hand_value(dealer_hand)
-        screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, BLACK), (20, 500))
-
-    # Create buttons
-    screen.blit(hit_button, hit_button_rect)
-    screen.blit(stand_button, stand_button_rect)
-    screen.blit(new_game_button, new_game_button_rect)
-
-    # Check for win/lose conditions
-    if game_over:
-        if player_value > 21:
-            screen.blit(font.render(" Player busts! Dealer wins.", True, BLACK), (300, 250))
-        elif dealer_value > 21:
-            screen.blit(font.render(" Dealer busts! Player wins.", True, BLACK), (300, 250))
-        elif dealer_value > player_value:
-            screen.blit(font.render(" Dealer wins.", True, BLACK), (300, 250))
-        elif dealer_value < player_value:
-            screen.blit(font.render(" Player wins.", True, BLACK), (300, 250))
+        # Show the dealer's first card face-down during the player's turn
+        if not game_over:
+            screen.blit(back_of_card, (140, 340))
+            display_dealer_card(20, 340 )
         else:
-            screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
+            display_hand(dealer_hand, 20, 340)  # Show the entire dealer's hand
+
+        if game_over:
+            dealer_value = calculate_hand_value(dealer_hand)
+            screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, BLACK), (20, 500))
+
+        # Create buttons
+        screen.blit(hit_button, hit_button_rect)
+        screen.blit(stand_button, stand_button_rect)
+        screen.blit(new_game_button, new_game_button_rect)
+
+        # Check for win/lose conditions
+        if game_over:
+            if player_value > 21:
+                screen.blit(font.render(" Player busts! Dealer wins.", True, BLACK), (300, 250))
+            elif dealer_value > 21:
+                screen.blit(font.render(" Dealer busts! Player wins.", True, BLACK), (300, 250))
+            elif dealer_value > player_value:
+                screen.blit(font.render(" Dealer wins.", True, BLACK), (300, 250))
+            elif dealer_value < player_value:
+                screen.blit(font.render(" Player wins.", True, BLACK), (300, 250))
+            else:
+                screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
 
     pygame.display.flip()
 
