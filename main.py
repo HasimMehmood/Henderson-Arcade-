@@ -72,7 +72,7 @@ dealer_hand = [deck.pop(), deck.pop()]
 hit_button_rect = pygame.Rect(20, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 stand_button_rect = pygame.Rect(140, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
-play_button_rect= pygame.Rect(500,480, 240, 124)
+play_button_rect= pygame.Rect(520,480, 240, 124)
 
 # Create a function to display a hand
 def display_hand(hand, x, y):
@@ -134,7 +134,7 @@ while running:
         screen.blit(start_screen, (0,0))
         screen.blit(play_button, play_button_rect)
         if(event.type== pygame.MOUSEBUTTONDOWN and play_button_rect.collidepoint(event.pos)):
-            play_anim("Play Button", 500,480 )
+            play_anim("Play Button", 520,480 )
             game_start=True
     else: 
         if not game_over :  # Check if the game is not over.
