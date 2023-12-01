@@ -134,7 +134,7 @@ while running:
         screen.blit(start_screen, (0,0))
         screen.blit(play_button, play_button_rect)
         if(event.type== pygame.MOUSEBUTTONDOWN and play_button_rect.collidepoint(event.pos)):
-            play_anim("Play Button", 520,480 )
+            play_anim("Play Button", play_button_rect.left, play_button_rect.top )
             game_start=True
     else: 
         if not game_over :  # Check if the game is not over.
@@ -144,13 +144,13 @@ while running:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if hit_button_rect.collidepoint(event.pos):
                     # The "Hit" button was clicked, so draw a card and add it to the player's hand.
-                    play_anim("Hit", 20, 520)
+                    play_anim("Hit", hit_button_rect.left, hit_button_rect.top)
                     if not deck:
                         reset_deck()  # If the deck is empty, reshuffle the cards.
                     player_hand.append(deck.pop())  # Draw a card from the deck.
                 elif stand_button_rect.collidepoint(event.pos):
                     # The "Stand" button was clicked, so the player's turn is over. Or the value is over 21.
-                    play_anim("Stand", 140, 520)
+                    play_anim("Stand", stand_button_rect.left,stand_button_rect.top)
                     dealer_draw()
                     game_over = True  # The game is now over.
 
@@ -158,7 +158,7 @@ while running:
             if new_game_button_rect.collidepoint(event.pos):
                 # The "New Game" button was clicked, so reset the game by reshuffling the deck
                 # and dealing new hands for both the player and the dealer.
-                play_anim("New Game", 260,520)
+                play_anim("New Game", new_game_button_rect.left,new_game_button_rect.top)
                 pygame.display.flip()
                 pygame.time.delay(50)  # Display the animation for 1000 milliseconds (adjust as needed)
                 reset_deck()  # If the deck is empty, reshuffle the cards.
