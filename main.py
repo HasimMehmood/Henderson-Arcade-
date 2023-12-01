@@ -20,9 +20,14 @@ Money= 100
 hit_button= pygame.image.load("Assets\\Buttons\\Button/Hit_Button.png")
 stand_button= pygame.image.load("Assets\\Buttons\\Button/Stand_Button.png")
 new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
-play_button= pygame.image.load("Assets\Start Screen\Play_Button.png")
+bet_button= pygame.image.load("Assets\\Betting\\Bet_Button.png")
+left_button= pygame.image.load("Assets\\Betting\Left_Button.png")
+right_button= pygame.image.load("Assets\\Betting\\Right_Button.png")
+UI_betting= pygame.image.load("Assets\\Betting\\UI Betting.png")
+coin_pile= pygame.image.load("Assets\\Betting\\Coin_Pile.png")
+play_button= pygame.image.load("Assets\\Start Screen\\Play_Button.png")
 back_of_card= pygame.image.load("Assets\\Cards\\Back_of_Card.png")
-start_screen= pygame.image.load("Assets\Start Screen\Start_Screen.png")
+start_screen= pygame.image.load("Assets\\Start Screen\\Start_Screen.png")
 animations = ["New Game", "Hit", "Stand", "Play Button", "Bet Button", "Left Button", "Right Button"]
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -73,6 +78,11 @@ hit_button_rect = pygame.Rect(20, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 stand_button_rect = pygame.Rect(140, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 play_button_rect= pygame.Rect(520,480, 240, 124)
+UI_betting_rect= pygame.Rect(400,100, 350,300)
+coin_pile_rect= pygame.Rect(380, 170, 82,87)
+bet_button_rect= pygame.Rect(UI_betting_rect.left+100, UI_betting_rect.top+200, 145, 60)
+left_button_rect= pygame.Rect(bet_button_rect.left+100,bet_button_rect.top-40, 35,35)
+right_button_rect=pygame.Rect(left_button_rect.left-100 ,left_button_rect.top, 35,35)
 
 # Create a function to display a hand
 def display_hand(hand, x, y):
@@ -194,6 +204,11 @@ while running:
         screen.blit(hit_button, hit_button_rect)
         screen.blit(stand_button, stand_button_rect)
         screen.blit(new_game_button, new_game_button_rect)
+        screen.blit(UI_betting,UI_betting_rect)
+        screen.blit(coin_pile, coin_pile_rect)
+        screen.blit(bet_button, bet_button_rect)
+        screen.blit(left_button,left_button_rect)
+        screen.blit(right_button, right_button_rect)       
 
         # Check for win/lose conditions
         if game_over:
