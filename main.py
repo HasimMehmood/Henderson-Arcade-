@@ -23,7 +23,7 @@ new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
 play_button= pygame.image.load("Assets\Start Screen\Play_Button.png")
 back_of_card= pygame.image.load("Assets\\Cards\\Back_of_Card.png")
 start_screen= pygame.image.load("Assets\Start Screen\Start_Screen.png")
-animations = ["New Game", "Hit", "Stand", "Play Button"]
+animations = ["New Game", "Hit", "Stand", "Play Button", "Bet Button", "Left Button", "Right Button"]
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
