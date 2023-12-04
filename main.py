@@ -134,6 +134,7 @@ def dealer_draw():
 running = True
 game_over = False
 game_start=False
+bet_placed= False
 
 # Main game loop
 while running:
@@ -150,20 +151,31 @@ while running:
         if not game_over :  # Check if the game is not over.
             if calculate_hand_value(player_hand)>= 21:  
                 dealer_draw()
-                game_over = True  # The game is now over.
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+                game_over = True  # The game is now over. 
+            elif (event.type == pygame.MOUSEBUTTONDOWN and bet_placed==False): 
+                if left_button_rect.collidepoint(event.pos):
+                    print("Left button clicked")
+                    play_anim("Left Button", left_button_rect.left, left_button_rect.top)
+                elif right_button_rect.collidepoint(event.pos):
+                    print("Right button clicked")
+                    play_anim("Right Button", right_button_rect.left, right_button_rect.top)
+                elif bet_button_rect.collidepoint(event.pos):
+                    print("Bet button pressed")
+                    play_anim("Bet Button", bet_button_rect.left, bet_button_rect.top)
+                    bet_placed=True
+            elif (event.type == pygame.MOUSEBUTTONDOWN and bet_placed==True):
                 if hit_button_rect.collidepoint(event.pos):
                     # The "Hit" button was clicked, so draw a card and add it to the player's hand.
                     play_anim("Hit", hit_button_rect.left, hit_button_rect.top)
-                    if not deck:
-                        reset_deck()  # If the deck is empty, reshuffle the cards.
                     player_hand.append(deck.pop())  # Draw a card from the deck.
                 elif stand_button_rect.collidepoint(event.pos):
                     # The "Stand" button was clicked, so the player's turn is over. Or the value is over 21.
                     play_anim("Stand", stand_button_rect.left,stand_button_rect.top)
                     dealer_draw()
                     game_over = True  # The game is now over.
-
+                    bet_placed=False
+                    
+     
         if event.type == pygame.MOUSEBUTTONDOWN:
             if new_game_button_rect.collidepoint(event.pos):
                 # The "New Game" button was clicked, so reset the game by reshuffling the deck
@@ -175,6 +187,7 @@ while running:
                 player_hand = [deck.pop(), deck.pop()]  # Deal two cards to the player.
                 dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
                 game_over = False  # The game is not over.
+                bet_placed=False
 
         screen.fill(WHITE)
 
