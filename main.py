@@ -79,9 +79,9 @@ stand_button_rect = pygame.Rect(140, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
 play_button_rect= pygame.Rect(520,480, 240, 124)
 UI_betting_rect= pygame.Rect(400,100, 350,300)
-coin_pile_rect= pygame.Rect(380, 170, 82,87)
+coin_pile_rect= pygame.Rect(UI_betting_rect.left+230, UI_betting_rect.top+30, 82,87)
 bet_button_rect= pygame.Rect(UI_betting_rect.left+100, UI_betting_rect.top+200, 145, 60)
-left_button_rect= pygame.Rect(bet_button_rect.left+100,bet_button_rect.top-40, 35,35)
+left_button_rect= pygame.Rect(bet_button_rect.left+104,bet_button_rect.top-40, 35,35)
 right_button_rect=pygame.Rect(left_button_rect.left-100 ,left_button_rect.top, 35,35)
 
 # Create a function to display a hand
