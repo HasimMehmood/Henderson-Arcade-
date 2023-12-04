@@ -130,11 +130,14 @@ def dealer_draw():
         dealer_hand.append(deck.pop())  # Dealer draws a card.
 
 
+
 # Main game loop
 running = True
 game_over = False
 game_start=False
 bet_placed= False
+bet=0
+money=0
 
 # Main game loop
 while running:
@@ -155,14 +158,19 @@ while running:
             elif (event.type == pygame.MOUSEBUTTONDOWN and bet_placed==False): 
                 if left_button_rect.collidepoint(event.pos):
                     print("Left button clicked")
+                    bet= bet-10
+                    print(bet)
                     play_anim("Left Button", left_button_rect.left, left_button_rect.top)
                 elif right_button_rect.collidepoint(event.pos):
                     print("Right button clicked")
                     play_anim("Right Button", right_button_rect.left, right_button_rect.top)
+                    bet= bet+10
+                    print(bet)
                 elif bet_button_rect.collidepoint(event.pos):
                     print("Bet button pressed")
                     play_anim("Bet Button", bet_button_rect.left, bet_button_rect.top)
                     bet_placed=True
+                   
             elif (event.type == pygame.MOUSEBUTTONDOWN and bet_placed==True):
                 if hit_button_rect.collidepoint(event.pos):
                     # The "Hit" button was clicked, so draw a card and add it to the player's hand.
@@ -227,12 +235,16 @@ while running:
         if game_over:
             if player_value > 21:
                 screen.blit(font.render(" Player busts! Dealer wins.", True, BLACK), (300, 250))
+                money= money+bet
             elif dealer_value > 21:
                 screen.blit(font.render(" Dealer busts! Player wins.", True, BLACK), (300, 250))
+                money= money-bet
             elif dealer_value > player_value:
                 screen.blit(font.render(" Dealer wins.", True, BLACK), (300, 250))
+                money= money-bet
             elif dealer_value < player_value:
                 screen.blit(font.render(" Player wins.", True, BLACK), (300, 250))
+                money= money+bet
             else:
                 screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
 
