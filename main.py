@@ -145,6 +145,7 @@ def moneyChange(Money):
     elif(bet <=10 and Money > 0):
         bet= bet+Money
 
+
 # Main game loop
 while running:
     for event in pygame.event.get():
@@ -211,7 +212,8 @@ while running:
         player_value = calculate_hand_value(player_hand)
         screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 250))
 
-
+        #Display current bet
+        screen.blit(font.render(str(bet), True, BLACK), (right_button_rect.left+50, right_button_rect.top ))
 
         # Display dealer's hand text
         screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 300))
