@@ -130,7 +130,6 @@ def dealer_draw():
         dealer_hand.append(deck.pop())  # Dealer draws a card.
 
 
-
 # Main game loop
 running = True
 game_over = False
@@ -138,6 +137,13 @@ game_start=False
 bet_placed= False
 bet=0
 money=0
+
+def moneyChange(Money):
+    global bet
+    if bet >= 10 :
+        bet= bet+Money
+    elif(bet <=10 and Money > 0):
+        bet= bet+Money
 
 # Main game loop
 while running:
@@ -158,13 +164,13 @@ while running:
             elif (event.type == pygame.MOUSEBUTTONDOWN and bet_placed==False): 
                 if left_button_rect.collidepoint(event.pos):
                     print("Left button clicked")
-                    bet= bet-10
+                    moneyChange(-10)
                     print(bet)
                     play_anim("Left Button", left_button_rect.left, left_button_rect.top)
                 elif right_button_rect.collidepoint(event.pos):
                     print("Right button clicked")
                     play_anim("Right Button", right_button_rect.left, right_button_rect.top)
-                    bet= bet+10
+                    moneyChange(10)
                     print(bet)
                 elif bet_button_rect.collidepoint(event.pos):
                     print("Bet button pressed")
