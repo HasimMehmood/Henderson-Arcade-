@@ -136,9 +136,9 @@ game_over = False
 game_start=False
 bet_placed= False
 bet=0
-money=0
+money=50
 
-def moneyChange(Money):
+def betChange(Money):
     global bet
     if bet >= 10 :
         bet= bet+Money
@@ -165,13 +165,13 @@ while running:
             elif (event.type == pygame.MOUSEBUTTONDOWN and bet_placed==False): 
                 if left_button_rect.collidepoint(event.pos):
                     print("Left button clicked")
-                    moneyChange(-10)
+                    betChange(-10)
                     print(bet)
                     play_anim("Left Button", left_button_rect.left, left_button_rect.top)
                 elif right_button_rect.collidepoint(event.pos):
                     print("Right button clicked")
                     play_anim("Right Button", right_button_rect.left, right_button_rect.top)
-                    moneyChange(10)
+                    betChange(10)
                     print(bet)
                 elif bet_button_rect.collidepoint(event.pos):
                     print("Bet button pressed")
@@ -203,6 +203,7 @@ while running:
                 dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
                 game_over = False  # The game is not over.
                 bet_placed=False
+                
 
         screen.fill(WHITE)
 
@@ -214,6 +215,7 @@ while running:
 
         #Display current bet
         screen.blit(font.render(str(bet), True, BLACK), (right_button_rect.left-50, right_button_rect.top+5 ))
+        
 
         # Display dealer's hand text
         screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 300))
@@ -254,7 +256,10 @@ while running:
                 screen.blit(font.render(" Player wins.", True, BLACK), (300, 250))
                 money= money+bet
             else:
-                screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
+                    screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
+            #Display money amount
+            screen.blit(font.render(f"Money: {money}", True, RED), (right_button_rect.left-80, right_button_rect.top+150 ))
+    
 
     pygame.display.flip()
 
