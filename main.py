@@ -9,7 +9,7 @@ pygame.init()
 pygame.display.set_icon(pygame.image.load("Assets\Favicon\BlackJack_32x32.png") )
 
 # Define constants
-SCREEN_WIDTH, SCREEN_HEIGHT = 1000, 900
+SCREEN_WIDTH, SCREEN_HEIGHT = 1000, 800
 CARD_WIDTH, CARD_HEIGHT = 100, 150
 CARD_GAP = 20
 BUTTON_WIDTH, BUTTON_HEIGHT = 100, 40
