@@ -130,6 +130,8 @@ def dealer_draw():
         dealer_hand.append(deck.pop())  # Dealer draws a card.
 
 
+
+
 # Main game loop
 running = True
 game_over = False
@@ -137,6 +139,7 @@ game_start=False
 bet_placed= False
 bet=0
 money=50
+moneyDisplayed=False 
 
 def betChange(Money):
     global bet
@@ -144,6 +147,17 @@ def betChange(Money):
         bet= bet+Money
     elif(bet <=10 and Money > 0):
         bet= bet+Money
+
+def displayMoney(gameStatus):
+    global moneyDisplayed
+    global money
+    if moneyDisplayed==False:
+        if gameStatus=="win":
+            money= money+bet
+        elif gameStatus=="lost":
+            money= money-bet          
+        screen.blit(font.render(f"Money: {money}", True, RED), (right_button_rect.left-80, right_button_rect.top+150 ))
+        moneyDisplayed= True
 
 
 # Main game loop
@@ -203,6 +217,7 @@ while running:
                 dealer_hand = [deck.pop(), deck.pop()]  # Deal two cards to the dealer.
                 game_over = False  # The game is not over.
                 bet_placed=False
+                moneyDisplayed=False
                 
 
         screen.fill(WHITE)
@@ -239,28 +254,29 @@ while running:
         screen.blit(coin_pile, coin_pile_rect)
         screen.blit(bet_button, bet_button_rect)
         screen.blit(left_button,left_button_rect)
-        screen.blit(right_button, right_button_rect)       
+        screen.blit(right_button, right_button_rect)
+        screen.blit(font.render(f"Money: {money}", True, RED), (right_button_rect.left-80, right_button_rect.top+150 ))
+      
 
         # Check for win/lose conditions
         if game_over:
             if player_value > 21:
                 screen.blit(font.render(" Player busts! Dealer wins.", True, BLACK), (300, 250))
-                money= money+bet
+                displayMoney("lost")
             elif dealer_value > 21:
                 screen.blit(font.render(" Dealer busts! Player wins.", True, BLACK), (300, 250))
-                money= money-bet
+                displayMoney("win")
             elif dealer_value > player_value:
                 screen.blit(font.render(" Dealer wins.", True, BLACK), (300, 250))
-                money= money-bet
+                displayMoney("lost")
             elif dealer_value < player_value:
                 screen.blit(font.render(" Player wins.", True, BLACK), (300, 250))
-                money= money+bet
+                displayMoney("win")
             else:
-                    screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
-            #Display money amount
-            screen.blit(font.render(f"Money: {money}", True, RED), (right_button_rect.left-80, right_button_rect.top+150 ))
-    
-
+                screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
+                displayMoney("tie")
+           
+ 
     pygame.display.flip()
 
 pygame.quit()
