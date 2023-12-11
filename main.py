@@ -9,14 +9,13 @@ pygame.init()
 pygame.display.set_icon(pygame.image.load("Assets\Favicon\BlackJack_32x32.png") )
 
 # Define constants
-SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
+SCREEN_WIDTH, SCREEN_HEIGHT = 1000, 900
 CARD_WIDTH, CARD_HEIGHT = 100, 150
 CARD_GAP = 20
 BUTTON_WIDTH, BUTTON_HEIGHT = 100, 40
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK= (0,0,0)
-Money= 100
 hit_button= pygame.image.load("Assets\\Buttons\\Button/Hit_Button.png")
 stand_button= pygame.image.load("Assets\\Buttons\\Button/Stand_Button.png")
 new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
@@ -143,9 +142,9 @@ moneyDisplayed=False
 
 def betChange(Money):
     global bet
-    if bet >= 10 :
+    if (bet >= 10 and money-bet>0 ) :
         bet= bet+Money
-    elif(bet <=10 and Money > 0):
+    elif(bet <=10 and Money > 0 and money-bet>0):
         bet= bet+Money
 
 def displayMoney(gameStatus):
