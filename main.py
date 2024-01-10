@@ -77,7 +77,7 @@ hit_button_rect = pygame.Rect(20, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
 stand_button_rect = pygame.Rect(140, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
 play_button_rect= pygame.Rect(520,480, 240, 124)
-UI_betting_rect= pygame.Rect(624,100, 350,300)
+UI_betting_rect= pygame.Rect(624,150, 350,300)
 coin_pile_rect= pygame.Rect(UI_betting_rect.left+230, UI_betting_rect.top+30, 82,87)
 bet_button_rect= pygame.Rect(UI_betting_rect.left+100, UI_betting_rect.top+200, 145, 60)
 right_button_rect=pygame.Rect(bet_button_rect.left+104,bet_button_rect.top-40, 35,35)
@@ -222,28 +222,28 @@ while running:
         screen.fill(WHITE)
 
         # Display player's hand
-        screen.blit(font.render("Player's Hand:", True, BLACK), (20, 0))
-        display_hand(player_hand, 20, 60)
+        screen.blit(font.render("Player's Hand:", True, BLACK), (20, 150))
+        display_hand(player_hand, 20, 210)
         player_value = calculate_hand_value(player_hand)
-        screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 250))
+        screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 430))
 
         #Display current bet
         screen.blit(font.render(str(bet), True, BLACK), (right_button_rect.left-50, right_button_rect.top+5 ))
         
 
         # Display dealer's hand text
-        screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 300))
+        screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 490))
 
         # Show the dealer's first card face-down during the player's turn
         if not game_over:
-            screen.blit(back_of_card, (140, 340))
-            display_dealer_card(20, 340 )
+            screen.blit(back_of_card, (140, 520))
+            display_dealer_card(20, 520)
         else:
-            display_hand(dealer_hand, 20, 340)  # Show the entire dealer's hand
+            display_hand(dealer_hand, 20, 550)  # Show the entire dealer's hand
 
         if game_over:
             dealer_value = calculate_hand_value(dealer_hand)
-            screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, BLACK), (20, 500))
+            screen.blit(font.render(f"Dealer's Hand Value: {dealer_value}", True, BLACK), (20, 715))
 
         # Create buttons
         screen.blit(hit_button, hit_button_rect)
@@ -260,19 +260,19 @@ while running:
         # Check for win/lose conditions
         if game_over:
             if player_value > 21:
-                screen.blit(font.render(" Player busts! Dealer wins.", True, BLACK), (300, 250))
+                screen.blit(font.render(" Player busts! Dealer wins.", True, BLACK), (380, 760))
                 displayMoney("lost")
             elif dealer_value > 21:
-                screen.blit(font.render(" Dealer busts! Player wins.", True, BLACK), (300, 250))
+                screen.blit(font.render(" Dealer busts! Player wins.", True, BLACK), (380, 760))
                 displayMoney("win")
             elif dealer_value > player_value:
-                screen.blit(font.render(" Dealer wins.", True, BLACK), (300, 250))
+                screen.blit(font.render(" Dealer wins.", True, BLACK), (380, 760))
                 displayMoney("lost")
             elif dealer_value < player_value:
-                screen.blit(font.render(" Player wins.", True, BLACK), (300, 250))
+                screen.blit(font.render(" Player wins.", True, BLACK), (380, 760))
                 displayMoney("win")
             else:
-                screen.blit(font.render(" It's a tie!", True, BLACK), (300, 250))
+                screen.blit(font.render(" It's a tie!", True, BLACK), (380, 760))
                 displayMoney("tie")
            
  
