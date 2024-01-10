@@ -6,7 +6,7 @@ from PIL import Image, ImageSequence
 pygame.init()
 
 #Set Game icon
-pygame.display.set_icon(pygame.image.load("Assets\Favicon\BlackJack_32x32.png") )
+pygame.display.set_icon(pygame.image.load("Assets\\Favicon\BlackJack_32x32.png") )
 
 # Define constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 1000, 800
@@ -20,7 +20,7 @@ hit_button= pygame.image.load("Assets\\Buttons\\Button/Hit_Button.png")
 stand_button= pygame.image.load("Assets\\Buttons\\Button/Stand_Button.png")
 new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
 bet_button= pygame.image.load("Assets\\Betting\\Bet_Button.png")
-left_button= pygame.image.load("Assets\\Betting\Left_Button.png")
+left_button= pygame.image.load("Assets\\Betting\\Left_Button.png")
 right_button= pygame.image.load("Assets\\Betting\\Right_Button.png")
 UI_betting= pygame.image.load("Assets\\Betting\\UI Betting.png")
 coin_pile= pygame.image.load("Assets\\Betting\\Coin_Pile.png")
@@ -73,11 +73,11 @@ dealer_hand = [deck.pop(), deck.pop()]
 
 
 # Define button coordinates and colors
-hit_button_rect = pygame.Rect(20, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
-stand_button_rect = pygame.Rect(140, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
-new_game_button_rect = pygame.Rect(260, 520, BUTTON_WIDTH, BUTTON_HEIGHT)
+hit_button_rect = pygame.Rect(20, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
+stand_button_rect = pygame.Rect(140, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
+new_game_button_rect = pygame.Rect(260, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
 play_button_rect= pygame.Rect(520,480, 240, 124)
-UI_betting_rect= pygame.Rect(400,100, 350,300)
+UI_betting_rect= pygame.Rect(624,100, 350,300)
 coin_pile_rect= pygame.Rect(UI_betting_rect.left+230, UI_betting_rect.top+30, 82,87)
 bet_button_rect= pygame.Rect(UI_betting_rect.left+100, UI_betting_rect.top+200, 145, 60)
 right_button_rect=pygame.Rect(bet_button_rect.left+104,bet_button_rect.top-40, 35,35)
@@ -222,7 +222,7 @@ while running:
         screen.fill(WHITE)
 
         # Display player's hand
-        screen.blit(font.render("Player's Hand:", True, BLACK), (20, 20))
+        screen.blit(font.render("Player's Hand:", True, BLACK), (20, 0))
         display_hand(player_hand, 20, 60)
         player_value = calculate_hand_value(player_hand)
         screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 250))
