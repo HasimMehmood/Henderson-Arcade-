@@ -73,7 +73,7 @@ player_hand = [deck.pop(), deck.pop()]
 dealer_hand = [deck.pop(), deck.pop()]
 
 
-# Define button coordinates and colors
+# Define button coordinates and size
 hit_button_rect = pygame.Rect(20, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
 stand_button_rect = pygame.Rect(140, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
@@ -221,6 +221,7 @@ while running:
                 
 
         screen.fill(WHITE)
+        screen.blit(banner, (0,0))
 
         # Display player's hand
         screen.blit(font.render("Player's Hand:", True, BLACK), (20, 150))
