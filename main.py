@@ -27,6 +27,7 @@ coin_pile= pygame.image.load("Assets\\Betting\\Coin_Pile.png")
 play_button= pygame.image.load("Assets\\Start Screen\\Play_Button.png")
 back_of_card= pygame.image.load("Assets\\Cards\\Back_of_Card.png")
 start_screen= pygame.image.load("Assets\\Start Screen\\Start_Screen.png")
+banner= pygame.image.load("Assets\Start Screen\Henderson_Blackjack.png")
 animations = ["New Game", "Hit", "Stand", "Play Button", "Bet Button", "Left Button", "Right Button"]
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -72,7 +73,7 @@ player_hand = [deck.pop(), deck.pop()]
 dealer_hand = [deck.pop(), deck.pop()]
 
 
-# Define button coordinates and colors
+# Define button coordinates and size
 hit_button_rect = pygame.Rect(20, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
 stand_button_rect = pygame.Rect(140, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
 new_game_button_rect = pygame.Rect(260, 750, BUTTON_WIDTH, BUTTON_HEIGHT)
@@ -220,6 +221,7 @@ while running:
                 
 
         screen.fill(WHITE)
+        screen.blit(banner, (0,0))
 
         # Display player's hand
         screen.blit(font.render("Player's Hand:", True, BLACK), (20, 150))
@@ -227,9 +229,11 @@ while running:
         player_value = calculate_hand_value(player_hand)
         screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 430))
 
+
         #Display current bet
         screen.blit(font.render(str(bet), True, BLACK), (right_button_rect.left-50, right_button_rect.top+5 ))
         
+
 
         # Display dealer's hand text
         screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 490))
