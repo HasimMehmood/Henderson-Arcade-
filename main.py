@@ -6,7 +6,7 @@ from PIL import Image, ImageSequence
 pygame.init()
 
 #Set Game icon
-pygame.display.set_icon(pygame.image.load("Assets\\Favicon\BlackJack_32x32.png") )
+pygame.display.set_icon(pygame.image.load("Assets\\Favicon\\BlackJack_32x32.png") )
 
 # Define constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 1000, 800
@@ -16,6 +16,8 @@ BUTTON_WIDTH, BUTTON_HEIGHT = 100, 40
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK= (0,0,0)
+frame= pygame.image.load("Assets\\Frame\\Frame.png")
+developers= pygame.image.load("Assets\\Developers.jpg")
 hit_button= pygame.image.load("Assets\\Buttons\\Button/Hit_Button.png")
 stand_button= pygame.image.load("Assets\\Buttons\\Button/Stand_Button.png")
 new_game_button= pygame.image.load("Assets\\Buttons\\Button/NewGame_Button.png")
@@ -27,7 +29,7 @@ coin_pile= pygame.image.load("Assets\\Betting\\Coin_Pile.png")
 play_button= pygame.image.load("Assets\\Start Screen\\Play_Button.png")
 back_of_card= pygame.image.load("Assets\\Cards\\Back_of_Card.png")
 start_screen= pygame.image.load("Assets\\Start Screen\\Start_Screen.png")
-banner= pygame.image.load("Assets\Start Screen\Henderson_Blackjack.png")
+banner= pygame.image.load("Assets\\Start Screen\\Henderson_Blackjack.png")
 animations = ["New Game", "Hit", "Stand", "Play Button", "Bet Button", "Left Button", "Right Button"]
 # Define the ranks and suits for the deck of cards
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -83,6 +85,8 @@ coin_pile_rect= pygame.Rect(UI_betting_rect.left+230, UI_betting_rect.top+30, 82
 bet_button_rect= pygame.Rect(UI_betting_rect.left+100, UI_betting_rect.top+200, 145, 60)
 right_button_rect=pygame.Rect(bet_button_rect.left+104,bet_button_rect.top-40, 35,35)
 left_button_rect= pygame.Rect(right_button_rect.left-100 ,right_button_rect.top, 35,35 )
+framelocation= (600,500)
+devlocation= (620,515)
 
 # Create a function to display a hand
 def display_hand(hand, x, y):
@@ -222,6 +226,8 @@ while running:
 
         screen.fill(WHITE)
         screen.blit(banner, (0,0))
+        screen.blit(frame, framelocation)
+        screen.blit(developers, devlocation)
 
         # Display player's hand
         screen.blit(font.render("Player's Hand:", True, BLACK), (20, 150))
