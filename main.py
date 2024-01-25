@@ -86,7 +86,7 @@ bet_button_rect= pygame.Rect(UI_betting_rect.left+100, UI_betting_rect.top+200, 
 right_button_rect=pygame.Rect(bet_button_rect.left+104,bet_button_rect.top-40, 35,35)
 left_button_rect= pygame.Rect(right_button_rect.left-100 ,right_button_rect.top, 35,35 )
 framelocation= (600,500)
-devlocation= (620,515)
+devPhotoLocation= (620,515)
 
 # Create a function to display a hand
 def display_hand(hand, x, y):
@@ -147,10 +147,8 @@ moneyDisplayed=False
 
 def betChange(Money):
     global bet
-    if (bet >= 10 and money-bet>0 ) :
-        bet= bet+Money
-    elif(bet <=10 and Money > 0 and money-bet>0):
-        bet= bet+Money
+    if (bet + Money >= 0 and money - bet - Money >= 0):
+        bet = bet + Money
 
 def displayMoney(gameStatus):
     global moneyDisplayed
@@ -227,7 +225,7 @@ while running:
         screen.fill(WHITE)
         screen.blit(banner, (0,0))
         screen.blit(frame, framelocation)
-        screen.blit(developers, devlocation)
+        screen.blit(developers, devPhotoLocation)
 
         # Display player's hand
         screen.blit(font.render("Player's Hand:", True, BLACK), (20, 150))
@@ -235,19 +233,17 @@ while running:
         player_value = calculate_hand_value(player_hand)
         screen.blit(font.render(f"Player's Hand Value: {player_value}", True, BLACK), (20, 430))
 
-
         #Display current bet
         screen.blit(font.render(str(bet), True, BLACK), (right_button_rect.left-50, right_button_rect.top+5 ))
         
-
 
         # Display dealer's hand text
         screen.blit(font.render("Dealer's Hand:", True, BLACK), (20, 490))
 
         # Show the dealer's first card face-down during the player's turn
         if not game_over:
-            screen.blit(back_of_card, (140, 520))
-            display_dealer_card(20, 520)
+            screen.blit(back_of_card, (140, 550))
+            display_dealer_card(20, 550)
         else:
             display_hand(dealer_hand, 20, 550)  # Show the entire dealer's hand
 
