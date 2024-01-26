@@ -46,6 +46,7 @@ for animation_name in animations:
     animation_frames[animation_name] = frames
     animation_width, animation_height = animation_frames[animation_name][0].size # Get the size of the first frame to determine the dimensions
 
+#GIF logic 
 def play_anim(anim_name, xcoord, ycoord):
     for frame in animation_frames[anim_name]:
         pygame_frame = pygame.image.fromstring(frame.tobytes(), frame.size, 'RGB')
@@ -106,7 +107,7 @@ def display_dealer_card(x, y):
 def calculate_hand_value(hand):
     value = 0
     num_aces = 0
-
+#assign cards value
     for card in hand:
         if card:
             rank = card["rank"]
@@ -126,14 +127,12 @@ def calculate_hand_value(hand):
     return value
 
 
-    #Create function to Draw cards for dealer
+    #Create function to draw cards for dealer
 def dealer_draw():
     while calculate_hand_value(dealer_hand) < 17:
         if not deck:
             reset_deck()  # If the deck is empty, reshuffle the cards.
         dealer_hand.append(deck.pop())  # Dealer draws a card.
-
-
 
 
 # Main game loop
@@ -149,6 +148,7 @@ def betChange(Money):
     global bet
     if (bet + Money >= 0 and money - bet - Money >= 0):
         bet = bet + Money
+    #making sure bet never exceeds money
 
 def displayMoney(gameStatus):
     global moneyDisplayed
@@ -160,7 +160,7 @@ def displayMoney(gameStatus):
             money= money-bet          
         screen.blit(font.render(f"Money: {money}", True, RED), (right_button_rect.left-80, right_button_rect.top+150 ))
         moneyDisplayed= True
-
+#logic to display money after game ends
 
 # Main game loop
 while running:
@@ -173,6 +173,7 @@ while running:
         if(event.type== pygame.MOUSEBUTTONDOWN and play_button_rect.collidepoint(event.pos)):
             play_anim("Play Button", play_button_rect.left, play_button_rect.top )
             game_start=True
+            #start screen logic 
     else: 
         if not game_over :  # Check if the game is not over.
             if calculate_hand_value(player_hand)>= 21:  
@@ -180,20 +181,14 @@ while running:
                 game_over = True  # The game is now over. 
             elif (event.type == pygame.MOUSEBUTTONDOWN and bet_placed==False): 
                 if left_button_rect.collidepoint(event.pos):
-                    print("Left button clicked")
                     betChange(-10)
-                    print(bet)
                     play_anim("Left Button", left_button_rect.left, left_button_rect.top)
                 elif right_button_rect.collidepoint(event.pos):
-                    print("Right button clicked")
                     play_anim("Right Button", right_button_rect.left, right_button_rect.top)
                     betChange(10)
-                    print(bet)
                 elif bet_button_rect.collidepoint(event.pos):
-                    print("Bet button pressed")
                     play_anim("Bet Button", bet_button_rect.left, bet_button_rect.top)
                     bet_placed=True
-                   
             elif (event.type == pygame.MOUSEBUTTONDOWN and bet_placed==True):
                 if hit_button_rect.collidepoint(event.pos):
                     # The "Hit" button was clicked, so draw a card and add it to the player's hand.
